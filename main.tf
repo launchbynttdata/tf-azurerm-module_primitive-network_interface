@@ -22,18 +22,14 @@ resource "azurerm_network_interface" "network_interface" {
   enable_accelerated_networking = var.enable_accelerated_networking
   internal_dns_name_label       = var.internal_dns_name_label
   tags                          = var.tags
-
-  dynamic "ip_configuration" {
-    for_each = var.ip_configuration != null ? var.ip_configuration : []
-    content {
-      name                                               = ip_configuration.value.name
-      gateway_load_balancer_frontend_ip_configuration_id = ip_configuration.value.gateway_load_balancer_frontend_ip_configuration_id
-      subnet_id                                          = ip_configuration.value.subnet_id
-      private_ip_address_version                         = ip_configuration.value.private_ip_address_version
-      private_ip_address_allocation                      = ip_configuration.value.private_ip_address_allocation
-      public_ip_address_id                               = ip_configuration.value.public_ip_address_id
-      primary                                            = ip_configuration.value.primary
-      private_ip_address                                 = ip_configuration.value.private_ip_address
-    }
+  ip_configuration {
+    name                                               = var.ip_configuration.name
+    gateway_load_balancer_frontend_ip_configuration_id = var.ip_configuration.gateway_load_balancer_frontend_ip_configuration_id
+    subnet_id                                          = var.ip_configuration.subnet_id
+    private_ip_address_version                         = var.ip_configuration.private_ip_address_version
+    private_ip_address_allocation                      = var.ip_configuration.private_ip_address_allocation
+    public_ip_address_id                               = var.ip_configuration.public_ip_address_id
+    primary                                            = var.ip_configuration.primary
+    private_ip_address                                 = var.ip_configuration.private_ip_address
   }
 }
