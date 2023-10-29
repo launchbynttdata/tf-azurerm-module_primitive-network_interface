@@ -11,7 +11,7 @@
 // limitations under the License.
 
 variable "ip_configuration" {
-  type = object({
+  type = list(object({
     name                                               = string
     gateway_load_balancer_frontend_ip_configuration_id = optional(string)
     subnet_id                                          = optional(string)
@@ -20,7 +20,8 @@ variable "ip_configuration" {
     public_ip_address_id                               = optional(string)
     primary                                            = optional(bool)
     private_ip_address                                 = optional(string)
-  })
+  }))
+  description = "values for ip_configuration"
 }
 
 variable "name" {
@@ -82,5 +83,5 @@ variable "internal_dns_name_label" {
 variable "tags" {
   type        = map(string)
   description = "(Optional) A mapping of tags to assign to the resource."
-  default     = null
+  default     = {}
 }
