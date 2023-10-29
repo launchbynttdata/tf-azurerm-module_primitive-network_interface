@@ -24,7 +24,7 @@ resource "azurerm_network_interface" "network_interface" {
   tags                          = var.tags
 
   dynamic "ip_configuration" {
-    for_each = var.ip_configuration != null ? 1 : 0
+    for_each = var.ip_configuration != null ? var.ip_configuration : []
     content {
       name                                               = ip_configuration.value.name
       gateway_load_balancer_frontend_ip_configuration_id = ip_configuration.value.gateway_load_balancer_frontend_ip_configuration_id
