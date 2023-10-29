@@ -11,7 +11,7 @@
 // limitations under the License.
 
 variable "ip_configuration" {
-  type = map(object({
+  type = object({
     name                                               = string
     gateway_load_balancer_frontend_ip_configuration_id = optional(string)
     subnet_id                                          = optional(string)
@@ -20,7 +20,7 @@ variable "ip_configuration" {
     public_ip_address_id                               = optional(string)
     primary                                            = optional(bool)
     private_ip_address                                 = optional(string)
-  }))
+  })
   description = "map containining NIC name as key and ip configuration object as value"
 }
 
