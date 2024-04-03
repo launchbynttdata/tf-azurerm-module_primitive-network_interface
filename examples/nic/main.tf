@@ -22,6 +22,8 @@ module "nic" {
   ip_configuration              = local.ip_configuration
   tags                          = var.tags
   enable_accelerated_networking = var.enable_accelerated_networking
+  internal_dns_name_label       = var.internal_dns_name_label
+  enable_ip_forwarding          = var.enable_ip_forwarding
 
   depends_on = [module.resource_group]
 }
