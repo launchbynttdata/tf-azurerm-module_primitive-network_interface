@@ -11,7 +11,7 @@
 // limitations under the License.
 
 variable "ip_configuration" {
-  type = object({
+  type = list(object({
     name                                               = string
     gateway_load_balancer_frontend_ip_configuration_id = optional(string)
     subnet_id                                          = optional(string)
@@ -20,8 +20,8 @@ variable "ip_configuration" {
     public_ip_address_id                               = optional(string)
     primary                                            = optional(bool)
     private_ip_address                                 = optional(string)
-  })
-  description = "map containining NIC name as key and ip configuration object as value"
+  }))
+  description = "List containining the IP Configuration for the Network Interface."
 }
 
 variable "name" {
@@ -39,22 +39,10 @@ variable "resource_group_name" {
   description = "(Required) The name of the resource group in which to create the Network Interface. Changing this forces a new resource to be created."
 }
 
-variable "auxillary_mode" {
-  type        = string
-  description = "(Optional) Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections and Floating."
-  default     = null
-}
-
-variable "auxiliary_sku" {
-  type        = string
-  description = "(Optional) Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A1, A2, A4 and A8."
-  default     = null
-}
-
 variable "dns_servers" {
   type        = list(string)
   description = "(Optional) A list of DNS servers IP addresses to associate with the NIC. Use 'AzureProvidedDNS' to switch to Azure provided DNS resolution."
-  default     = null
+  default     = []
 }
 
 variable "edge_zone" {

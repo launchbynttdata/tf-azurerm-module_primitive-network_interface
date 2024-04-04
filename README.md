@@ -5,7 +5,7 @@
 
 ## Overview
 
-What does this module do?
+A network interface (NIC) enables an Azure virtual machine (VM) to communicate with internet, Azure, and on-premises resources. This module helps deploy one using terraform.
 
 ## Pre-Commit hooks
 
@@ -110,7 +110,6 @@ If `make check` target is successful, developer is good to commit the code to pr
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0, <= 1.5.5 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.77 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.6 |
 
 ## Providers
 
@@ -132,13 +131,11 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_ip_configuration"></a> [ip\_configuration](#input\_ip\_configuration) | map containining NIC name as key and ip configuration object as value | <pre>object({<br>    name                                               = string<br>    gateway_load_balancer_frontend_ip_configuration_id = optional(string)<br>    subnet_id                                          = optional(string)<br>    private_ip_address_version                         = optional(string)<br>    private_ip_address_allocation                      = string<br>    public_ip_address_id                               = optional(string)<br>    primary                                            = optional(bool)<br>    private_ip_address                                 = optional(string)<br>  })</pre> | n/a | yes |
+| <a name="input_ip_configuration"></a> [ip\_configuration](#input\_ip\_configuration) | List containining the IP Configuration for the Network Interface. | <pre>list(object({<br>    name                                               = string<br>    gateway_load_balancer_frontend_ip_configuration_id = optional(string)<br>    subnet_id                                          = optional(string)<br>    private_ip_address_version                         = optional(string)<br>    private_ip_address_allocation                      = string<br>    public_ip_address_id                               = optional(string)<br>    primary                                            = optional(bool)<br>    private_ip_address                                 = optional(string)<br>  }))</pre> | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | (Required) The name of the Network Interface. Changing this forces a new resource to be created. | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | (Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the resource group in which to create the Network Interface. Changing this forces a new resource to be created. | `string` | n/a | yes |
-| <a name="input_auxillary_mode"></a> [auxillary\_mode](#input\_auxillary\_mode) | (Optional) Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections and Floating. | `string` | `null` | no |
-| <a name="input_auxiliary_sku"></a> [auxiliary\_sku](#input\_auxiliary\_sku) | (Optional) Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A1, A2, A4 and A8. | `string` | `null` | no |
-| <a name="input_dns_servers"></a> [dns\_servers](#input\_dns\_servers) | (Optional) A list of DNS servers IP addresses to associate with the NIC. Use 'AzureProvidedDNS' to switch to Azure provided DNS resolution. | `list(string)` | `null` | no |
+| <a name="input_dns_servers"></a> [dns\_servers](#input\_dns\_servers) | (Optional) A list of DNS servers IP addresses to associate with the NIC. Use 'AzureProvidedDNS' to switch to Azure provided DNS resolution. | `list(string)` | `[]` | no |
 | <a name="input_edge_zone"></a> [edge\_zone](#input\_edge\_zone) | (Optional) Specifies the Edge Zone where the resource should be created. Changing this forces a new resource to be created. | `string` | `null` | no |
 | <a name="input_enable_ip_forwarding"></a> [enable\_ip\_forwarding](#input\_enable\_ip\_forwarding) | (Optional) Should IP forwarding be enabled on this NIC? Defaults to false. | `bool` | `false` | no |
 | <a name="input_enable_accelerated_networking"></a> [enable\_accelerated\_networking](#input\_enable\_accelerated\_networking) | (Optional) Should accelerated networking be enabled on this NIC? Defaults to false. | `bool` | `false` | no |
@@ -150,6 +147,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_id"></a> [id](#output\_id) | The ID of the Network Interface. |
+| <a name="output_name"></a> [name](#output\_name) | The name of the Network Interface. |
 | <a name="output_applied_dns_servers"></a> [applied\_dns\_servers](#output\_applied\_dns\_servers) | If the Virtual Machine using this Network Interface is part of an Availability Set, then this list will have the union of all DNS servers from all Network Interfaces that are part of the Availability Set. |
 | <a name="output_internal_domain_name_suffix"></a> [internal\_domain\_name\_suffix](#output\_internal\_domain\_name\_suffix) | Even if internal\_dns\_name\_label is not specified, a DNS entry is created for the primary NIC of the VM. This DNS name can be constructed by concatenating the VM name with the value of internal\_domain\_name\_suffix. |
 | <a name="output_mac_address"></a> [mac\_address](#output\_mac\_address) | The Media Access Control (MAC) Address of the Network Interface. |
