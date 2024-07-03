@@ -30,7 +30,8 @@ module "nic" {
 
 
 module "resource_group" {
-  source = "git::https://github.com/launchbynttdata/tf-azurerm-module_primitive-resource_group.git?ref=1.0.0"
+  source  = "terraform.registry.launch.nttdata.com/module_primitive/resource_group/azurerm"
+  version = "~> 1.0"
 
   name     = local.resource_group_name
   location = var.location
@@ -41,7 +42,8 @@ module "resource_group" {
 
 
 module "resource_names" {
-  source = "git::https://github.com/launchbynttdata/tf-launch-module_library-resource_name.git?ref=1.0.0"
+  source  = "terraform.registry.launch.nttdata.com/module_library/resource_name/launch"
+  version = "~> 1.0"
 
   for_each = var.resource_names_map
 
@@ -56,7 +58,8 @@ module "resource_names" {
 }
 
 module "virtual_network" {
-  source = "git::https://github.com/launchbynttdata/tf-azurerm-module_primitive-virtual_network.git?ref=1.0.0"
+  source  = "terraform.registry.launch.nttdata.com/module_primitive/virtual_network/azurerm"
+  version = "~> 1.0"
 
   vnet_name           = local.virtual_network_name
   vnet_location       = var.location
@@ -70,7 +73,8 @@ module "virtual_network" {
 }
 
 module "public_ip" {
-  source = "git::https://github.com/launchbynttdata/tf-azurerm-module_primitive-public_ip.git?ref=1.0.0"
+  source  = "terraform.registry.launch.nttdata.com/module_primitive/public_ip/azurerm"
+  version = "~> 1.0"
 
   name                = local.public_ip_name
   location            = var.location
