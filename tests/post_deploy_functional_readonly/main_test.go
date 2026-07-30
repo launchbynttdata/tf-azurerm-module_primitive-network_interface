@@ -33,5 +33,5 @@ func TestNicModule(t *testing.T) {
 		SetTestConfigFileName(infraTFVarFileNameDefault).
 		Build()
 
-	lib.RunNonDestructiveTest(t, *ctx, testimpl.TestNic)
+	lib.RunNonDestructiveTest(t, *ctx, testimpl.TestComposableNic)
 }
