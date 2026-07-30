@@ -16,7 +16,7 @@ locals {
   virtual_network_name = module.resource_names["virtual_network"].minimal_random_suffix
   public_ip_name       = module.resource_names["public_ip"].minimal_random_suffix
 
-  subnet_id            = lookup(module.virtual_network.vnet_subnets_name_id, "subnet1", null)
+  subnet_id            = lookup(module.virtual_network.subnet_name_id_map, "subnet1", null)
   public_ip_address_id = module.public_ip.id
   ip_configuration     = [for config in var.ip_configuration : merge(config, { subnet_id = local.subnet_id, public_ip_address_id = local.public_ip_address_id })]
 }
