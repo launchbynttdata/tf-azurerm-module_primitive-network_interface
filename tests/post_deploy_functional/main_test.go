@@ -21,7 +21,7 @@ import (
 )
 
 const (
-	testConfigsExamplesFolderDefault = "../../examples"
+	testConfigsExamplesFolderDefault = "../../examples/nic"
 	infraTFVarFileNameDefault        = "test.tfvars"
 )
 
@@ -33,5 +33,5 @@ func TestNicModule(t *testing.T) {
 		SetTestConfigFileName(infraTFVarFileNameDefault).
 		Build()
 
-	lib.RunSetupTestTeardown(t, *ctx, testimpl.TestNic)
+	lib.RunSetupTestTeardown(t, *ctx, testimpl.TestComposableNic)
 }
