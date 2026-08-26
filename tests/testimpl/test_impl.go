@@ -30,9 +30,9 @@ func TestComposableNic(t *testing.T, ctx types.TestContext) {
 	}
 
 	t.Run("doesNicExist", func(t *testing.T) {
-		resourceGroupName := terraform.Output(t, ctx.TerratestTerraformOptions(), "resource_group_name")
-		nicName := terraform.Output(t, ctx.TerratestTerraformOptions(), "name")
-		id := terraform.Output(t, ctx.TerratestTerraformOptions(), "id")
+		resourceGroupName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "resource_group_name")
+		nicName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "name")
+		id := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "id")
 
 		nic, err := nicClient.Get(context.Background(), resourceGroupName, nicName, nil)
 		if err != nil {
